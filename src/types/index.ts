@@ -35,3 +35,89 @@ export type Game = {
         image: string;
     }[];
 };
+export type Review = {
+    id: string;
+    userId: string;
+    username: string;
+    gameId: number;
+    rating: number;
+    review?: string;
+    createdAt: string;
+};
+export type Screenshot = {
+    id: number;
+    image: string;
+    width: number;
+    height: number;
+    is_deleted: boolean;
+};
+
+
+export type GameDetail = {
+    id: number;
+    slug: string;
+    name: string;
+    playtime: number;
+    released: string;
+    background_image: string;
+    background_image_additional?: string;
+    description_raw: string;
+
+    platforms: {
+        platform: {
+            id: number;
+            name: string;
+            slug: string;
+            image_background?: string | null;
+        };
+        released_at?: string;
+        requirements?: {
+            minimum?: string;
+            recommended?: string;
+        };
+    }[];
+
+    genres: {
+        id: number;
+        name: string;
+        slug: string;
+    }[];
+
+    developers?: {
+        id: number;
+        name: string;
+        slug: string;
+        image_background?: string;
+    }[];
+
+    publishers?: {
+        id: number;
+        name: string;
+        slug: string;
+        image_background?: string;
+    }[];
+
+    esrb_rating?: {
+        id: number;
+        name: string;
+        slug: string;
+    };
+
+    stores?: {
+        id: number;
+        url: string;
+        store: {
+            id: number;
+            name: string;
+            slug: string;
+            domain: string;
+            image_background?: string;
+        };
+    }[];
+
+    reviews: Review[];
+    averageUserRating: number | null;
+    totalReviews: number;
+    screenshots?: Screenshot[];
+};
+

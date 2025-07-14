@@ -15,9 +15,9 @@ export default function RootLayout({
       <body>
         <main>
           <div className="max-w-screen bg-dark-gray">
-            <Navbar />
+            <Navbar/>
           </div>
-          <div className="pt-[78px]">
+          <div>
             {children}
           </div>
         </main>
