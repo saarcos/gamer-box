@@ -23,7 +23,7 @@ export default function GameDetailBanner({ gameDetail }: { gameDetail: GameDetai
                 </h1>
                 <div className="flex justify-center gap-6 flex-wrap mb-6">
                     <button className="cursor-pointer flex items-center gap-2 bg-neutral-800/60 hover:bg-neutral-700 px-4 py-2 rounded-full text-sm text-white transition-all shadow">
-                        <Gamepad2 className="w-5 h-5 text-discord-blue" />
+                        <Gamepad2 className="w-5 h-5 text-light-purple" />
                         Played
                     </button>
                     <button className="cursor-pointer flex items-center gap-2 bg-neutral-800/60 hover:bg-neutral-700 px-4 py-2 rounded-full text-sm text-white transition-all shadow">

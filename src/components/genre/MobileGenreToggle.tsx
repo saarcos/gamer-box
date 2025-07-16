@@ -25,7 +25,7 @@ export default function MobileGenreToggle({ genres }: { genres: Genre[] }) {
         <div className="sm:hidden fixed bottom-20 left-2 z-50">
             <button
                 onClick={() => setIsOpen(true)}
-                className="fixed font-title text- bottom-4 right-4 bg-light-blue hover:bg-light-orange/90 text-black px-4 py-2 rounded-full shadow-md transition"
+                className="fixed font-title text- bottom-4 right-4 bg-light-pink hover:bg-light-orange/90 text-black px-4 py-2 rounded-full shadow-md transition"
                 aria-label="Open genre menu"
             >
                 🎮 Genres
@@ -37,12 +37,12 @@ export default function MobileGenreToggle({ genres }: { genres: Genre[] }) {
                         onClick={handleClose}
                     />
                     <div
-                        className="fixed right-0 top-0 h-full w-72 bg-dark-gray text-white z-50 shadow-lg px-6 py-8 flex flex-col gap-6"
+                        className="fixed right-0 top-0 h-full w-72 bg-dark-purple text-white z-50 shadow-lg px-6 py-8 flex flex-col gap-6"
                         ref={drawerRef}
                     >
                         <button
                             onClick={handleClose}
-                            className="self-end text-light-blue"
+                            className="self-end text-light-pink"
                             aria-label="Close menu"
                         >
                             <X size={28} />

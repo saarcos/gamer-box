@@ -1,27 +1,24 @@
-import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: 'GamerBox'
 }
-export default function RootLayout({
+export default function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <main>
-          <div className="max-w-screen bg-dark-gray">
-            <Navbar/>
-          </div>
-          <div>
-            {children}
-          </div>
-        </main>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <main>
+              {children}
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

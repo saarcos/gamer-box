@@ -29,7 +29,7 @@ export default function ScreenshotGallery({ screenshots }: { screenshots: Screen
                 ))}
             </div>
             {selectedImage && (
-                <div className='fixed inset-0 bg-dark-gray/70 z-50 flex items-center justify-center' onClick={() => setSelectedImage(null)}>
+                <div className='fixed inset-0 bg-dark-purple/70 z-50 flex items-center justify-center' onClick={() => setSelectedImage(null)}>
                     <div className="relative w-[90vw] max-w-5xl aspect-video">
                         <Image
                             src={selectedImage}

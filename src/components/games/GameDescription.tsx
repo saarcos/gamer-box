@@ -9,7 +9,7 @@ export default function GameDescription({ description }: { description: string }
         .split(/\n{2,}|(?<=\.)\s*\n+/) 
         .map(p => p.trim())
         .filter(Boolean);
-    const MAX_VISIBLE_PARAGRAPHS = 3;
+    const MAX_VISIBLE_PARAGRAPHS = 4;
     return (
         <div className="relative">
             {paragraphs.slice(0, expanded ? paragraphs.length : MAX_VISIBLE_PARAGRAPHS).map((p, i) => (
@@ -18,7 +18,7 @@ export default function GameDescription({ description }: { description: string }
             {paragraphs.length > MAX_VISIBLE_PARAGRAPHS && (
                 <button
                     onClick={() => setExpanded(prev => !prev)}
-                    className="text-discord-blue hover:underline text-sm font-semibold mt-2 cursor-pointer"
+                    className="text-light-purple hover:underline text-sm font-semibold mt-2 cursor-pointer"
                 >
                     {expanded ? 'Read less' : 'Read more'}
                 </button>

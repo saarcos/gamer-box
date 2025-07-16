@@ -6,7 +6,10 @@
 
 body {
   color: black;
-  background: #18181B;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @utility no-scrollbar {
@@ -14,12 +17,16 @@ body {
 }
 
 @theme {
-  --color-light-blue: #5F6CAF;
-  --color-discord-blue: #7289DA;
-  --color-dark-gray: #0E1015;
-  --color-light-gray: #18181B;
+  --color-light-pink: #DB2777;
+  --color-light-purple: #8B5CF6;     /* púrpura más suave y elegante (tipo "violeta real") */
+  --color-dark-purple: #0A0015;        /* fondo púrpura oscuro casi negro, más sobrio */
+  --color-light-gray: #1A102B;       /* gris púrpura suave, ideal para contenedores/cards */
   --font-title: 'Barlow Condensed', sans-serif;
   --font-body: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--color-dark-purple);
 }
 
 @theme inline {
@@ -133,6 +140,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

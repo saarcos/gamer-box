@@ -6,7 +6,7 @@ import { Gamepad2, Heart, SquarePen } from 'lucide-react';
 import Link from 'next/link';
 export default function GameCard({ game }: { game: Game }) {
     return (
-        <div className="group h-full flex flex-col justify-between shadow-2xl rounded-lg overflow-hidden border-2 backdrop-blur-md border-indigo-500/10 transition-transform hover:scale-[1.015] duration-300 hover:border-discord-blue cursor-pointer">
+        <div className="group h-full flex flex-col justify-between shadow-2xl rounded-lg overflow-hidden border-2 backdrop-blur-md border-indigo-500/10 transition-transform hover:scale-[1.015] duration-300 hover:border-light-purple cursor-pointer">
             <Link
                 href={`/games/${game.id}`}
                 className="absolute inset-0 z-10"
@@ -48,7 +48,7 @@ export default function GameCard({ game }: { game: Game }) {
                         rounded-md px-3 py-2 flex justify-center gap-3"
                 >
                     <button aria-label="View details" className="cursor-pointer">
-                        <Gamepad2 className="w-[17px] h-[17px] text-gray-300 hover:text-discord-blue transition-colors" />
+                        <Gamepad2 className="w-[17px] h-[17px] text-gray-300 hover:text-light-purple transition-colors" />
                     </button>
                     <button aria-label="Add to favorites" className="cursor-pointer">
                         <Heart className="w-[17px] h-[17px] text-gray-300 hover:text-pink-400 transition-colors" />
@@ -58,7 +58,7 @@ export default function GameCard({ game }: { game: Game }) {
                     </button>
                 </div>
             </div>
-            <div className="bg-gradient-to-br from-dark-gray to-black/80 text-white px-4 py-5 flex flex-col gap-3">
+            <div className="bg-gradient-to-b from-[#1A102B]/80 to-[#0A0015]/90 text-white px-4 py-5 flex flex-col gap-3">
                 <h3 className="font-title text-xl leading-tight line-clamp-2">{game.name}</h3>
                 <div className="flex items-center gap-2 flex-wrap">
                     {game.platforms.map(({ platform }) => (

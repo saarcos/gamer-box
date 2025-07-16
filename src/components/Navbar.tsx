@@ -4,10 +4,12 @@ import React from 'react'
 import MobileMenu from './MobileMenu'
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
+import UserMenu from './UserMenu';
 
 export default function Navbar() {
+    const { user, isSignedIn } = useUser();
     const pathname = usePathname()
-
     const isTransparent = pathname === '/games' || pathname.startsWith('/games')
     return (
         <nav
@@ -16,7 +18,7 @@ export default function Navbar() {
                 {
                     'absolute top-0 left-0 bg-gradient-to-b from-black/80 to-transparent':
                         isTransparent,
-                    'py-4 bg-gradient-to-br from-dark-gray to-black/80 shadow-md':
+                    'py-4 bg-gradient-to-b from-[#1e293a] to-[#0A0015] shadow-md':
                         !isTransparent,
                 }
             )}
@@ -27,24 +29,36 @@ export default function Navbar() {
                     href="/"
                     className="font-title text-[32px] uppercase whitespace-nowrap text-white"
                 >
-                    Gamer<span className="text-light-blue">Box</span>
+                    Gamer<span className="text-light-pink">Box</span>
                 </Link>
                 <ul className="hidden sm:flex items-center gap-6 mt-2 font-body text-base">
                     <li>
-                        <Link href="/" className="hover:text-discord-blue transition-colors duration-150">Home</Link>
+                        <Link href="/" className="hover:text-light-purple transition-colors duration-150">Home</Link>
                     </li>
                     <li>
-                        <a href="#games" className="hover:text-discord-blue transition-colors duration-150">Games</a>
+                        <a href="#games" className="hover:text-light-purple transition-colors duration-150">Games</a>
                     </li>
                     <li>
-                        <Link href="/activity" className="hover:text-discord-blue transition-colors duration-150">Activity</Link>
+                        <Link href="/activity" className="hover:text-light-purple transition-colors duration-150">Activity</Link>
                     </li>
                     <li>
-                        <Link href="/members" className="hover:text-discord-blue transition-colors duration-150">Members</Link>
+                        <Link href="/members" className="hover:text-light-purple transition-colors duration-150">Members</Link>
                     </li>
+                    {isSignedIn ? (
+                        <UserMenu user={user} />
+                    ) : (
+                        <li>
+                            <Link
+                                href="/sign-in"
+                                className="hover:text-light-purple transition-colors duration-150 cursor-pointer"
+                            >
+                                Log in
+                            </Link>
+                        </li>
+                    )}
                 </ul>
                 <div className="sm:hidden">
-                    <MobileMenu />
+                    <MobileMenu user={user} isSignedIn={isSignedIn  }/>
                 </div>
             </div>
         </nav>

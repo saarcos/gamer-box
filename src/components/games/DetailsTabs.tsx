@@ -13,19 +13,19 @@ export default function DetailsTabs({ gameDetail }: { gameDetail: GameDetail }) 
                 <TabsList className="p-0 bg-transparent justify-start gap-2">
                     <TabsTrigger
                         value="description"
-                        className="font-title text-lg cursor-pointer px-4 py-2 rounded-none bg-transparent text-neutral-300 hover:text-white border-b-2 border-transparent data-[state=active]:bg-discord-blue data-[state=active]:text-black transition-colors"
+                        className="font-title text-lg cursor-pointer px-4 py-2 rounded-none bg-transparent text-neutral-300 hover:text-white border-b-2 border-transparent data-[state=active]:bg-light-purple data-[state=active]:text-black transition-colors"
                     >
                         Description
                     </TabsTrigger>
                     <TabsTrigger
                         value="stores"
-                        className="font-title text-lg cursor-pointer px-4 py-2 rounded-none bg-transparent text-neutral-300 hover:text-white border-b-2 border-transparent data-[state=active]:bg-discord-blue data-[state=active]:text-black transition-colors"
+                        className="font-title text-lg cursor-pointer px-4 py-2 rounded-none bg-transparent text-neutral-300 hover:text-white border-b-2 border-transparent data-[state=active]:bg-light-purple data-[state=active]:text-black transition-colors"
                     >
                         Stores
                     </TabsTrigger>
                     <TabsTrigger
                         value="screenshots"
-                        className="font-title text-lg cursor-pointer px-4 py-2 rounded-none bg-transparent text-neutral-300 hover:text-white border-b-2 border-transparent data-[state=active]:bg-discord-blue data-[state=active]:text-black transition-colors"
+                        className="font-title text-lg cursor-pointer px-4 py-2 rounded-none bg-transparent text-neutral-300 hover:text-white border-b-2 border-transparent data-[state=active]:bg-light-purple data-[state=active]:text-black transition-colors"
                     >
                         Screenshots
                     </TabsTrigger>

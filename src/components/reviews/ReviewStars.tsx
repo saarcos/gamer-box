@@ -10,12 +10,12 @@ export default function ReviewStars({ rating }: { rating: number }) {
         const fullStars = Math.floor(rating);
         const arr = Array.from({ length: fullStars }, (_, i) => i + 1);
         stars = arr.map((star) => (
-            <Star key={`full-${star}`} className="w-3 h-3 text-discord-blue" />
+            <Star key={`full-${star}`} className="w-3 h-3 text-light-purple" />
         ));
 
         if (isDecimal) {
             stars.push(
-                <StarHalf key="half" className="w-3 h-3 text-discord-blue" />
+                <StarHalf key="half" className="w-3 h-3 text-light-purple" />
             );
         }
 

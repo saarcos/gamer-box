@@ -12,7 +12,7 @@ export default function GenreItem({ genre, href = "#" }: Props) {
   return (
     <Link
       href={href}
-      className="group flex items-center gap-4 cursor-pointer p-2.5 pr-4 rounded-2xl hover:bg-discord-blue/80 transition duration-200 ease-in-out text-white hover:shadow-lg"
+      className="group flex items-center gap-4 cursor-pointer p-2.5 pr-4 rounded-2xl hover:bg-light-purple/80 transition duration-200 ease-in-out text-white hover:shadow-lg"
       title={genre.name}
       aria-label={`View games in ${genre.name} genre`}
     >

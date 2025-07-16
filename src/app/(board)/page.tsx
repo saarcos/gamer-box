@@ -302,9 +302,9 @@ const Homepage = () => {
   ];
 
   return (
-    <div className="flex flex-col">
-      <h3 className="text-center py-5 uppercase text-4xl font-title text-white ">Popular <span className="text-discord-blue">games</span></h3>
-      <div className="h-1 w-60 mx-auto bg-light-blue"></div>
+    <div className="flex flex-col bg-gray-950/30">
+      <h3 className="text-center py-5 uppercase text-4xl font-title text-white ">Popular <span className="text-light-purple">games</span></h3>
+      <div className="h-1 w-60 mx-auto bg-light-pink"></div>
       <section className="flex min-h-[calc(100vh-74px)] w-full md:space-x-8 px-8 py-8 lg:px-10">
         <MobileGenreToggle genres={mockGenres} />
         <div className="hidden md:block w-[220px] lg:w-[250px] xl:w-[270px] bg-gray min-h-screen">

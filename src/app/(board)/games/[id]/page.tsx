@@ -1,9 +1,9 @@
 import DetailsTabs from '@/components/games/DetailsTabs';
 import GameDetailBanner from '@/components/games/GameDetailBanner';
-import ReviewStars from '@/components/reviews/ReviewStars';
+import ReviewsSection from '@/components/reviews/ReviewsSection';
 import { GameDetail } from '@/types';
 import dayjs from 'dayjs';
-import { CircleUser, Clock, Gamepad2, Heart, Settings, SquarePen, TagIcon, UserCheck } from 'lucide-react';
+import { Clock, Gamepad2, Settings, TagIcon, UserCheck } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
@@ -11,7 +11,6 @@ import React from 'react'
 export default async function GameDetails({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     console.log(id);
-
     const exampleGameDetail: GameDetail = {
         id: 58617,
         slug: "borderlands-3",
@@ -232,10 +231,10 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
         .filter(Boolean);
 
     return (
-        <div className="bg-neutral-900 text-white font-body">
+        <div className="bg-black/50 text-white font-body">
             <GameDetailBanner gameDetail={exampleGameDetail} />
             <div className="-mt-24 relative z-20 px-4 sm:px-8 max-w-7xl mx-auto">
-                <div className="bg-gradient-to-b from-neutral-900 to-neutral-950 rounded-xl p-6 shadow-2xl text-white space-y-6">
+                <div className="bg-gradient-to-b from-[#0A0015] via-[#0C001A] to-[#05000C] rounded-xl p-6 shadow-2xl text-white space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="relative w-full min-h-[320px] rounded-lg overflow-hidden group shadow-lg">
                             <Image
@@ -248,22 +247,22 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
                         </div>
                         <div className="flex flex-col gap-5">
                             <h2 className="text-3xl font-title font-semibold tracking-tight">
-                                Game <span className="text-discord-blue">Overview</span>
+                                Game <span className="text-light-purple">Overview</span>
                             </h2>
                             <div className="text-neutral-300 leading-relaxed max-w-prose">
                                 {paragraphs.slice(0, 1).map((paragraph, index) => (
                                     <div key={index} className="text-base">
-                                        {paragraph} <br /><Link href="/" className='text-discord-blue underline'>Read more.</Link>
+                                        {paragraph} <br /><Link href="#details" className='text-light-purple underline'>Read more.</Link>
                                     </div>
                                 ))}
                             </div>
                             <div className="flex flex-col gap-4 text-base text-neutral-200">
                                 <p className="capitalize flex items-center gap-2 font-title">
-                                    <Clock className="w-5 h-5 text-discord-blue" />
+                                    <Clock className="w-5 h-5 text-light-purple" />
                                     Release date: <span className="font-normal">{dayjs(exampleGameDetail.released).format('MMMM D, YYYY')}</span>
                                 </p>
                                 <div className="capitalize flex items-center gap-2 font-title">
-                                    <Gamepad2 className="w-5 h-5 text-discord-blue" />
+                                    <Gamepad2 className="w-5 h-5 text-light-purple" />
                                     Platforms:
                                     <div className="flex items-center gap-2 ml-2">
                                         {exampleGameDetail.platforms.map(({ platform }) => (
@@ -279,20 +278,20 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
                                     </div>
                                 </div>
                                 <p className="capitalize flex items-center gap-2 font-title">
-                                    <Settings className="w-5 h-5 text-discord-blue" />
+                                    <Settings className="w-5 h-5 text-light-purple" />
                                     Developers:
                                     <span className="font-normal ml-2">
                                         {exampleGameDetail.developers?.map((dev) => dev.name).join(', ')}
                                     </span>
                                 </p>
                                 <p className="capitalize flex items-center gap-2 font-title">
-                                    <TagIcon className="w-5 h-5 text-discord-blue" />
+                                    <TagIcon className="w-5 h-5 text-light-purple" />
                                     Genres:
                                     <span className="ml-2 flex flex-wrap gap-2">
                                         {exampleGameDetail.genres.map((genre) => (
                                             <span
                                                 key={genre.id}
-                                                className="bg-discord-blue bg-opacity-80 rounded-full px-3 py-0.5 text-sm font-medium"
+                                                className="bg-light-purple bg-opacity-80 rounded-full px-3 py-0.5 text-sm font-medium"
                                             >
                                                 {genre.name}
                                             </span>
@@ -300,7 +299,7 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
                                     </span>
                                 </p>
                                 <p className="capitalize flex items-center gap-2 font-title">
-                                    <UserCheck className="w-5 h-5 text-discord-blue" />
+                                    <UserCheck className="w-5 h-5 text-light-purple" />
                                     Publishers:
                                     <span className="font-normal ml-2">
                                         {exampleGameDetail.publishers?.map((pub) => pub.name).join(', ')}
@@ -309,65 +308,11 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
                             </div>
                         </div>
                     </div>
-                    <div className="mt-2 w-full">
+                    <div id='details' className="mt-2 w-full">
                         <DetailsTabs gameDetail={exampleGameDetail} />
                     </div>
-                </div>
-                <div className="mt-6 max-w-5xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-[1fr_250px] gap-6 px-5 py-6 bg-gradient-to-t from-neutral-900 to-neutral-950 rounded-xl shadow-xl border border-neutral-800">
-                        <div className="flex flex-col gap-6">
-                            <h3 className="font-title text-2xl capitalize text-white">
-                                Popular <span className="text-discord-blue">Reviews</span>
-                            </h3>
-                            {exampleGameDetail.reviews.map((review) => (
-                                <div
-                                    key={review.id}
-                                    className="flex items-start gap-3 py-4 px-1 border-b border-neutral-800 last:border-b-0"
-                                >
-                                    <CircleUser className="w-7 h-7 shrink-0 text-neutral-400" />
-                                    <div className="flex flex-col gap-1">
-                                        <div className="flex items-center gap-2">
-                                            <p className="text-xs text-neutral-400">
-                                                Review by <span className="text-white">{review.username}</span>
-                                            </p>
-                                            <ReviewStars rating={review.rating} />
-                                        </div>
-                                        <p className="text-sm text-neutral-300 leading-relaxed">{review.review}</p>
-                                        <p className="flex items-center text-xs gap-1 text-neutral-400 cursor-pointer hover:text-white transition">
-                                            <Heart className="w-3 h-3 text-pink-500" /> Like review
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="relative">
-                            <div className="sticky top-0 w-full">
-                                <div className="overflow-hidden rounded-lg shadow-md border border-neutral-700">
-                                    <div className="relative w-full h-[360px]">
-                                        <Image
-                                            src={exampleGameDetail.background_image}
-                                            alt="Game cover"
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="flex justify-center gap-4 mt-3 text-sm text-neutral-300">
-                                    <p className="flex items-center gap-1">
-                                        <Gamepad2 className="w-4 h-4 text-discord-blue" /> 20
-                                    </p>
-                                    <p className="flex items-center gap-1">
-                                        <Heart className="w-4 h-4 text-pink-500" /> 50
-                                    </p>
-                                    <p className="flex items-center gap-1">
-                                        <SquarePen className="w-4 h-4 text-yellow-300" /> 20
-                                    </p>
-                                </div>
-                                <button className="w-full mt-4 bg-discord-blue hover:bg-discord-blue/80 text-white font-title text-xl px-4 py-2 rounded-lg transition">
-                                    + Add Review
-                                </button>
-                            </div>
-                        </div>
+                    <div className="border-t border-neutral-800 pt-8">
+                        <ReviewsSection gameDetail={exampleGameDetail} />
                     </div>
                 </div>
             </div>
