@@ -41,6 +41,7 @@ export type Review = {
     username: string;
     gameId: number;
     rating: number;
+    userLiked: boolean;
     review?: string;
     createdAt: string;
 };
@@ -115,9 +116,41 @@ export type GameDetail = {
         };
     }[];
 
-    reviews: Review[];
     averageUserRating: number | null;
     totalReviews: number;
     screenshots?: Screenshot[];
 };
 
+export type RecentActivity = {
+    reviewId: string;
+    createdAt: string;
+    rating: number;
+    content: string;
+    gameId: number;
+    game: Pick<Game, 'id' | 'name' | 'slug' | 'background_image'>;
+
+};
+export type ReviewWithGame = {
+    id: string;
+    createdAt: string;
+    content: string;
+    rating: number;
+    likesCount: number;
+    userLiked?: boolean;
+    game: {
+        id: number;
+        name: string;
+        slug: string;
+        background_image: string;
+        released: string;
+    };
+};
+
+export type Member = {
+    id: string;
+    username: string;
+    imageUrl: string;
+    followers: number;
+    gamesCount: number;
+    reviewsCount: number;
+}

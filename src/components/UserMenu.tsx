@@ -47,12 +47,14 @@ export default function UserMenu({ user }: Props) {
       {isOpen && (
         <div className="absolute right-0 mt-3 w-40 rounded-xl bg-dark-purple shadow-xl border border-zinc-700 animate-dropdown z-50">
           <Link
+            onClick={() => setIsOpen(false)}
             href="/profile"
             className="block px-4 py-2 text-sm text-white hover:bg-light-purple/10 hover:text-light-purple transition-colors rounded-t-xl"
           >
             Profile
           </Link>
           <Link
+            onClick={() => setIsOpen(false)}
             href="/sign-out"
             className="block px-4 py-2 text-sm text-white hover:bg-light-purple/10 hover:text-light-purple transition-colors rounded-b-xl"
           >

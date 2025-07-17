@@ -39,9 +39,6 @@ export default function Navbar() {
                         <a href="#games" className="hover:text-light-purple transition-colors duration-150">Games</a>
                     </li>
                     <li>
-                        <Link href="/activity" className="hover:text-light-purple transition-colors duration-150">Activity</Link>
-                    </li>
-                    <li>
                         <Link href="/members" className="hover:text-light-purple transition-colors duration-150">Members</Link>
                     </li>
                     {isSignedIn ? (

@@ -10,20 +10,19 @@ export default function ReviewStars({ rating }: { rating: number }) {
         const fullStars = Math.floor(rating);
         const arr = Array.from({ length: fullStars }, (_, i) => i + 1);
         stars = arr.map((star) => (
-            <Star key={`full-${star}`} className="w-3 h-3 text-light-purple" />
+            <Star key={`full-${star}`} className="w-4 h-4 text-light-purple" />
         ));
 
         if (isDecimal) {
             stars.push(
-                <StarHalf key="half" className="w-3 h-3 text-light-purple" />
+                <StarHalf key="half" className="w-4 h-4 text-light-purple" />
             );
         }
-
         return stars;
     };
 
     return (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center justify-center gap-1">
             {renderStars()}
         </div>
     );
