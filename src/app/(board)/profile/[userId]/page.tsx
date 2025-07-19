@@ -7,7 +7,10 @@ interface SerializedUser {
     imageUrl: string;
     username: string ;
 }
-export default async function Profile() {
+export default async function Profile({params}:{params: Promise<{userId: string}>}) {
+    const {userId} = await params;
+    console.log(userId)
+    
     const user = await currentUser();
     const mockActivity: RecentActivity[] = [
         {
@@ -130,6 +133,7 @@ export default async function Profile() {
     };
     return (
         <div className='min-h-[calc(100vh-78px)] max-w-6xl mx-auto px-4 sm:px-8 lg:px-16 py-8 flex flex-col gap-6'>
+            <span className='text-white'>Welcome user {userId}</span>
             <ProfileHeader user={serializedUser} />
             <ProfileTabs activities={mockActivity} likedGames={mockGames} />
         </div>

@@ -1,8 +1,10 @@
 import GamesClient from "@/components/games/GamesClient";
 import MobileGenreToggle from "@/components/genre/MobileGenreToggle"
+import HomeBanner from "@/components/home/HomeBanner";
+import ScrollToGames from "@/components/ScrollToGames";
 import Sidebar from "@/components/Sidebar"
 import { Game } from "@/types";
-export const mockGames: Game[] = [
+const mockGames: Game[] = [
   {
     id: 58617,
     slug: "borderlands-3",
@@ -302,18 +304,26 @@ const Homepage = () => {
   ];
 
   return (
-    <div className="flex flex-col bg-gray-950/30">
-      <h3 className="text-center py-5 uppercase text-4xl font-title text-white ">Popular <span className="text-light-purple">games</span></h3>
-      <div className="h-1 w-60 mx-auto bg-light-pink"></div>
-      <section className="flex min-h-[calc(100vh-74px)] w-full md:space-x-8 px-8 py-8 lg:px-10">
-        <MobileGenreToggle genres={mockGenres} />
-        <div className="hidden md:block w-[220px] lg:w-[250px] xl:w-[270px] bg-gray min-h-screen">
-          <Sidebar genres={mockGenres} />
+    <div>
+      <ScrollToGames/>
+      <HomeBanner />
+      <div id="popularGames" className="flex flex-col bg-gray-950/30 mt-3">
+        <div className="text-center text-white">
+          <h2 className="text-4xl font-title uppercase tracking-wide">
+            Discover <span className="text-light-purple">Games</span>
+          </h2>
+          <div className="h-1 w-24 bg-light-pink mx-auto mt-2 rounded-full" />
         </div>
-        <div className="flex-1 w-full space-y-8">
-          <GamesClient initialGames={mockGames} />
-        </div>
-      </section>
+        <section className="flex min-h-[calc(100vh-74px)] w-full md:space-x-8 px-8 py-8 lg:px-10">
+          <MobileGenreToggle genres={mockGenres} />
+          <div className="hidden md:block w-[220px] lg:w-[250px] xl:w-[270px] bg-gray min-h-screen">
+            <Sidebar genres={mockGenres} />
+          </div>
+          <div className="flex-1 w-full space-y-8">
+            <GamesClient initialGames={mockGames} />
+          </div>
+        </section>
+      </div>
     </div>
   )
 }

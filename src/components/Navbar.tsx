@@ -6,11 +6,12 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import UserMenu from './UserMenu';
+import ScrollToPopularGames from './ScrollToPopularGames';
 
 export default function Navbar() {
     const { user, isSignedIn } = useUser();
     const pathname = usePathname()
-    const isTransparent = pathname === '/games' || pathname.startsWith('/games')
+    const isTransparent = pathname === '/games' || pathname.startsWith('/games') || pathname === '/'
     return (
         <nav
             className={clsx(
@@ -36,7 +37,7 @@ export default function Navbar() {
                         <Link href="/" className="hover:text-light-purple transition-colors duration-150">Home</Link>
                     </li>
                     <li>
-                        <a href="#games" className="hover:text-light-purple transition-colors duration-150">Games</a>
+                        <ScrollToPopularGames />
                     </li>
                     <li>
                         <Link href="/members" className="hover:text-light-purple transition-colors duration-150">Members</Link>
@@ -55,7 +56,7 @@ export default function Navbar() {
                     )}
                 </ul>
                 <div className="sm:hidden">
-                    <MobileMenu user={user} isSignedIn={isSignedIn  }/>
+                    <MobileMenu user={user} isSignedIn={isSignedIn} />
                 </div>
             </div>
         </nav>

@@ -147,7 +147,7 @@ export default function Members() {
                                 {member.topGames.map((game, i) => (
                                     <div
                                         key={i}
-                                        className='cursor-pointer relative w-[45px] h-[65px] rounded-md overflow-hidden border border-white/10 shadow-md hover:scale-[1.03] transition-transform duration-200'
+                                        className='cursor-pointer relative w-[55px] h-[75px] rounded-md overflow-hidden border border-white/10 shadow-md hover:scale-[1.03] transition-transform duration-200'
                                     >
                                         <Link href={`/games/${game.id}`} className="absolute inset-0">
                                             <Image

@@ -43,7 +43,7 @@ export default function GameCard({ game }: { game: Game }) {
                     </div>
                 )}
                 <div
-                    className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 translate-y-[-6px] group-hover:translate-y-0transition-all duration-300
+                    className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 translate-y-[-6px] group-hover:translate-y-0 transition-all duration-300
                         bg-[#16181d]/90 border border-indigo-500/10 
                         rounded-md px-3 py-2 flex justify-center gap-3"
                 >

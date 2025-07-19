@@ -14,9 +14,11 @@ export default function GameDetailBanner({ gameDetail }: { gameDetail: GameDetai
                 className="object-cover"
                 priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent z-10" />
-            <div className="absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-black/80 to-transparent z-10" />
-            <div className="absolute inset-y-0 right-0 w-1/5 bg-gradient-to-l from-black/80 to-transparent z-10" />
+            <div className="absolute inset-0 pointer-events-none z-10">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-transparent" />
+                <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black/70 via-black/10 to-transparent" />
+                <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black/70 via-black/10 to-transparent" />
+            </div>
             <div className="relative z-20 px-4 sm:px-8 lg:px-16 pt-[120px] max-w-7xl mx-auto text-center">
                 <h1 className="font-title text-5xl sm:text-6xl drop-shadow-xl mb-6">
                     {gameDetail.name}

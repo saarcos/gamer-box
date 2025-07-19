@@ -50,7 +50,7 @@ export default function DetailsTabs({ gameDetail }: { gameDetail: GameDetail }) 
                                 href={store.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-4 p-4 bg-neutral-900/20 hover:bg-neutral-800 transition-colors rounded-lg shadow-sm border border-neutral-700"
+                                className="flex items-center gap-4 p-4 bg-dark-purple/20 hover:bg-light-gray transition-colors rounded-lg shadow-sm border border-neutral-700"
                             >
                                 <div className="relative w-12 h-12 shrink-0 rounded overflow-hidden ">
                                     <Image
