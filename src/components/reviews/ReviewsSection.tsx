@@ -121,7 +121,7 @@ export default function ReviewsSection({ gameDetail }: { gameDetail: GameDetail 
                 <h3 className="font-title text-2xl capitalize text-white">
                     Popular <span className="text-light-purple">Reviews</span>
                 </h3>
-                {reviews.map((review) => (
+                {reviews.length > 0 ? reviews.map((review) => (
                     <div
                         key={review.id}
                         className="flex items-start gap-3 py-4 px-1 border-b border-neutral-800 last:border-b-0"
@@ -142,8 +142,24 @@ export default function ReviewsSection({ gameDetail }: { gameDetail: GameDetail 
                             </button>
                         </div>
                     </div>
-                ))}
-                <Pagination className="mt-6 flex justify-center">
+                )) : (
+                    <div className="flex flex-col items-center justify-center min-h-[400px] border-2 border-dashed border-light-purple rounded-lg bg-transparent text-indigo-300 p-8 text-center">
+                        <p className="mb-4 text-xl font-semibold">
+                            No reviews yet.
+                        </p>
+                        <p className="mb-6 max-w-md text-sm leading-relaxed">
+                            Be the first to write a review and share your thoughts about this game!
+                        </p>
+                        <button
+                            onClick={() => {/* lógica para abrir modal o formulario de review aquí */ }}
+                            className="border-2 border-light-purple text-white font-title text-lg px-4 py-3 rounded-lg transition hover:bg-light-purple/20 hover:text-white bg-transparent cursor-pointer"
+                            aria-label="Write a review"
+                        >
+                            Write a Review
+                        </button>
+                    </div>
+                )}
+                {reviews.length > 0 && <Pagination className="mt-6 flex justify-center">
                     <PaginationContent className="gap-2">
                         <PaginationItem>
                             <PaginationPrevious
@@ -188,7 +204,7 @@ export default function ReviewsSection({ gameDetail }: { gameDetail: GameDetail 
                             />
                         </PaginationItem>
                     </PaginationContent>
-                </Pagination>
+                </Pagination>}
             </div>
             <div className="relative">
                 <div className="sticky top-0 w-full">

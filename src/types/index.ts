@@ -35,6 +35,13 @@ export type Game = {
         image: string;
     }[];
 };
+export interface RawgGamesResponse {
+    count: number;
+    description: string;
+    next: string | null;
+    previous: string | null;
+    results: Game[];
+}
 export type Review = {
     id: string;
     userId: string;

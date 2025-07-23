@@ -4,23 +4,32 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { Gamepad2, Heart, SquarePen } from 'lucide-react';
 import Link from 'next/link';
+
 export default function GameCard({ game }: { game: Game }) {
+    console.log(game, game.platforms)
     return (
-        <div className="group h-full flex flex-col justify-between shadow-2xl rounded-lg overflow-hidden border-2 backdrop-blur-md border-indigo-500/10 transition-transform hover:scale-[1.015] duration-300 hover:border-light-purple cursor-pointer">
+        <div className="group h-full flex flex-col justify-between rounded-lg overflow-hidden border-2 border-indigo-500/10 backdrop-blur-md shadow-2xl transition-transform hover:scale-[1.015] duration-300 hover:border-light-purple cursor-pointer">
             <Link
                 href={`/games/${game.id}`}
                 className="absolute inset-0 z-10"
                 aria-label={`View details for ${game.name}`}
             />
-            <div className="relative">
-                <Image
-                    src={game.background_image}
-                    alt={game.name}
-                    width={1920}
-                    height={1080}
-                    className="h-72 w-full object-cover"
-                />
+            <div className="relative aspect-[16/9] w-full">
+                {game.background_image ? (
+                    <Image
+                        src={game.background_image}
+                        alt={game.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                ) : (
+                    <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                        <Gamepad2 className="text-gray-400 w-12 h-12" />
+                    </div>
+                )}
                 <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/80 to-transparent z-10" />
+
                 {game.metacritic && (
                     <div className="absolute bottom-4 left-4 z-20">
                         <div
@@ -42,6 +51,7 @@ export default function GameCard({ game }: { game: Game }) {
                         </div>
                     </div>
                 )}
+
                 <div
                     className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 translate-y-[-6px] group-hover:translate-y-0 transition-all duration-300
                         bg-[#16181d]/90 border border-indigo-500/10 
@@ -58,20 +68,27 @@ export default function GameCard({ game }: { game: Game }) {
                     </button>
                 </div>
             </div>
-            <div className="bg-gradient-to-b from-[#1A102B]/80 to-[#0A0015]/90 text-white px-4 py-5 flex flex-col gap-3">
+            <div className="flex-1 flex flex-col justify-between bg-gradient-to-b from-[#1A102B]/80 to-[#0A0015]/90 text-white px-4 py-5 gap-3">
                 <h3 className="font-title text-xl leading-tight line-clamp-2">{game.name}</h3>
                 <div className="flex items-center gap-2 flex-wrap">
-                    {game.platforms.map(({ platform }) => (
-                        <Image
-                            key={platform.id}
-                            src={`/games/${platform.id}.svg`}
-                            alt={platform.name}
-                            width={20}
-                            height={20}
-                        />
-                    ))}
+                    <div className="flex items-center gap-2 flex-wrap">
+                        {game.platforms?.length ? (
+                            game.platforms.slice(0, 3).map(({ platform }) => (
+                                <span
+                                    key={platform.id}
+                                    className="text-xs px-2 py-1 rounded bg-indigo-500/20 text-indigo-200 border border-indigo-500/30"
+                                >
+                                    {platform.name}
+                                </span>
+                            ))
+                        ) : (
+                            <span className="text-xs text-gray-400">Loading platforms...</span>
+                        )}
+                    </div>
                 </div>
-                <p className="text-sm text-gray-300">Released: {dayjs(game.released).format('MMMM D, YYYY')}</p>
+                <p className="text-sm text-gray-300">
+                    Released: {game.released ? dayjs(game.released).format('MMMM D, YYYY') : 'Unknown'}
+                </p>
             </div>
         </div>
     );
