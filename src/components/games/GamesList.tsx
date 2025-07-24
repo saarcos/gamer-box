@@ -7,14 +7,13 @@ type Props = {
 }
 export default function GamesList({ games }: Props) {
     return (
-        <div className='space-y-8'>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr">
+        <div className='flex flex-col gap-8'>
+            <div className="p-2 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr">
                 {games.map((game) => (
                     <GameCard key={game.id} game={game} />
                 ))}
             </div>
             <InfiniteFeed />
         </div>
-
     )
 }

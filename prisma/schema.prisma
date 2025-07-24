@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id
+  username    String   @unique
+  email       String   @unique
+  createdAt   DateTime @default(now())
+
+  //Relationships
+  reviews           Review[]
+  reviewLikes       ReviewLike[]
+  gameStatuses      UserGameStatus[]
+  followers         UserFollow[]     @relation("FollowedBy") // personas que lo siguen
+  following         UserFollow[]     @relation("Following") // personas a las que sigue
+  notifications     Notification[]   @relation("Recipient")
+  notificationsFrom Notification[]   @relation("Actor")
+}
+
+model UserFollow {
+  id         String   @id @default(uuid())
+  followerId String
+  followedId String
+  createdAt  DateTime @default(now())
+
+  follower User @relation("FollowedBy", fields: [followerId], references: [id])
+  followed User @relation("Following", fields: [followedId], references: [id])
+}
+
+model Review {
+  id                String    @id @default(uuid())
+  userId            String
+  gameId            Int
+  rating            Decimal   @db.Decimal(2, 1)
+  comment           String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
+
+  user          User           @relation(fields: [userId], references: [id])
+  likes         ReviewLike[]
+  notifications Notification[]
+}
+
+model ReviewLike {
+  id        String   @id @default(uuid())
+  userId    String
+  reviewId  String
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  review Review @relation(fields: [reviewId], references: [id])
+}
+
+model UserGameStatus {
+  id        String     @id @default(uuid())
+  userId    String
+  gameId    Int
+  status    GameStatus
+  createdAt DateTime   @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum GameStatus {
+  liked
+  played
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  type      NotificationType
+  actorId   String
+  reviewId  String?
+  createdAt DateTime         @default(now())
+  readAt    DateTime?
+
+  user   User    @relation("Recipient", fields: [userId], references: [id])
+  actor  User    @relation("Actor", fields: [actorId], references: [id])
+  review Review? @relation(fields: [reviewId], references: [id])
+}
+
+enum NotificationType {
+  follow
+  review_like
+}

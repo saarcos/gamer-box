@@ -1,10 +1,20 @@
 import React from 'react'
 import StarRating from './StarRating'
-import { Gamepad2, Heart } from 'lucide-react'
 import Image from 'next/image'
 import { GameDetail } from '@/types'
+import { getUserGameStatus, getUserReview } from '@/lib/gamestatus'
+import { currentUser } from '@clerk/nextjs/server'
+import PlayedButton from './PlayedButton'
+import LikedButton from './LikedButton'
 
-export default function GameDetailBanner({ gameDetail }: { gameDetail: GameDetail }) {
+export default async function GameDetailBanner({ gameDetail }: { gameDetail: GameDetail }) {
+    const user = await currentUser();
+    const [gameStatus, reviewStars] = user
+        ? await Promise.all([
+            getUserGameStatus(user.id, gameDetail.id),
+            getUserReview(user.id, gameDetail.id).then((r) => r?.rating.toNumber() ?? 0),
+        ])
+        : [{ played: false, liked: false }, 0]
     return (
         <div className="relative h-[60vh] w-full overflow-hidden">
             <Image
@@ -24,17 +34,11 @@ export default function GameDetailBanner({ gameDetail }: { gameDetail: GameDetai
                     {gameDetail.name}
                 </h1>
                 <div className="flex justify-center gap-6 flex-wrap mb-6">
-                    <button className="cursor-pointer flex items-center gap-2 bg-neutral-800/60 hover:bg-neutral-700 px-4 py-2 rounded-full text-sm text-white transition-all shadow">
-                        <Gamepad2 className="w-5 h-5 text-light-purple" />
-                        Played
-                    </button>
-                    <button className="cursor-pointer flex items-center gap-2 bg-neutral-800/60 hover:bg-neutral-700 px-4 py-2 rounded-full text-sm text-white transition-all shadow">
-                        <Heart className="w-5 h-5 text-pink-500" />
-                        Like
-                    </button>
-                    <div className="cursor-pointer flex items-center gap-3 bg-neutral-800/60 px-4 py-2 rounded-full shadow">
-                        <span className="text-sm text-white-300">Your Rating</span>
-                        <StarRating />
+                    <PlayedButton gameId={gameDetail.id} initialStatus={gameStatus.played} />
+                    <LikedButton gameId={gameDetail.id} initialStatus={gameStatus.liked} />
+                    <div className="cursor-pointer flex items-center gap-3 bg-black/60 text-gray-200 border border-white/10 hover:bg-black/70 px-4 py-2 rounded-full">
+                        <span className="text-sm text-white-300 font-semibold">Your Rating</span>
+                        <StarRating initialRating={reviewStars} />
                     </div>
                 </div>
             </div>

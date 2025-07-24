@@ -7,7 +7,6 @@ import { RawgGamesResponse } from "@/types";
 
 const Homepage = async () => {
   const today = new Date().toISOString().split('T')[0];
-  console.log(today)
   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
   &page_size=12
   &dates=2000-01-01,${today}
@@ -21,7 +20,6 @@ const Homepage = async () => {
   if (!res.ok) throw new Error('Games fetch failed');
 
   const data: RawgGamesResponse = await res.json();
-  // console.log(data)
   const mockGenres = [
     { id: 1, name: "Action", image_background: "https://media.rawg.io/media/games/737/737ea5662211d2e0bbd6f5989189e4f1.jpg" },
     { id: 2, name: "Adventure", image_background: "https://media.rawg.io/media/games/737/737ea5662211d2e0bbd6f5989189e4f1.jpg" },

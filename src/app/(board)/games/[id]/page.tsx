@@ -9,10 +9,8 @@ import Link from 'next/link';
 import React from 'react'
 export default async function GameDetails({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    // URLs para las dos llamadas
     const urlGame = `https://api.rawg.io/api/games/${id}?key=${process.env.RAWG_API_KEY}`;
     const urlScreenshots = `https://api.rawg.io/api/games/${id}/screenshots?key=${process.env.RAWG_API_KEY}`;
-    // Fetch paralelo
     const [resGame, resScreenshots] = await Promise.all([
         fetch(urlGame),
         fetch(urlScreenshots)
@@ -21,12 +19,9 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
     if (!resGame.ok || !resScreenshots.ok) {
         throw new Error('Failed to fetch game data or screenshots');
     }
-
-    // Datos
     const gameData = await resGame.json();
     const screenshotsData = await resScreenshots.json();
 
-    // Construir un objeto combinado
     const gameDetail: GameDetail = {
         id: gameData.id,
         slug: gameData.slug,

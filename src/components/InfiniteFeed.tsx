@@ -49,8 +49,8 @@ export default function InfiniteFeed() {
                 <div className="text-center py-6 text-muted-foreground">
                     <p>🚀 You’ve reached the end! No more games to load.</p>
                 </div>
-            }        >
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr">
+            }>
+            <div className="p-2 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr">
                 {allGames.map((game) => (
                     <GameCard key={game.id} game={game} />
                 ))}

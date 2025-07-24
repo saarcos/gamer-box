@@ -2,9 +2,9 @@
 import { Star, StarHalf } from 'lucide-react'
 import React, { useState } from 'react'
 
-export default function StarRating() {
-  const [rating, setRating] = useState(0)          // rating final
-  const [hoverRating, setHoverRating] = useState(0) // rating temporal (hover)
+export default function StarRating({ initialRating }: { initialRating: number }) {
+  const [rating, setRating] = useState(initialRating)
+  const [hoverRating, setHoverRating] = useState(0)
 
   const handleClick = (value: number) => {
     setRating(value)

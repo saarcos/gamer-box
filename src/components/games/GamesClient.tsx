@@ -7,7 +7,7 @@ type Props = {
 export default function GamesClient({ initialGames }: Props) {
 
     return (
-        <div className='space-y-8'>
+        <div>
             <GamesList games={initialGames}/>
         </div>
     )
