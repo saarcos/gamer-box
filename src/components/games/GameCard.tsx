@@ -10,9 +10,11 @@ export default function GameCard({ game }: { game: Game }) {
         <div className="group h-full flex flex-col justify-between rounded-lg overflow-hidden border-2 border-indigo-500/10 backdrop-blur-md shadow-2xl transition-transform hover:scale-[1.015] duration-300 hover:border-light-purple cursor-pointer">
             <Link
                 href={`/games/${game.id}`}
-                className="absolute inset-0 z-10"
+                className="absolute inset-0 z-50"
                 aria-label={`View details for ${game.name}`}
-            />
+            >
+                <span className="sr-only">Go to game details</span>
+            </Link>
             <div className="relative aspect-[16/9] w-full">
                 {game.background_image ? (
                     <Image

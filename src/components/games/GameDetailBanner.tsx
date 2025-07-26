@@ -1,20 +1,32 @@
+"use client"
 import React from 'react'
 import StarRating from './StarRating'
 import Image from 'next/image'
 import { GameDetail } from '@/types'
-import { getUserGameStatus, getUserReview } from '@/lib/gamestatus'
-import { currentUser } from '@clerk/nextjs/server'
 import PlayedButton from './PlayedButton'
 import LikedButton from './LikedButton'
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 
-export default async function GameDetailBanner({ gameDetail }: { gameDetail: GameDetail }) {
-    const user = await currentUser();
-    const [gameStatus, reviewStars] = user
-        ? await Promise.all([
-            getUserGameStatus(user.id, gameDetail.id),
-            getUserReview(user.id, gameDetail.id).then((r) => r?.rating.toNumber() ?? 0),
-        ])
-        : [{ played: false, liked: false }, 0]
+type Props = {
+    gameDetail: GameDetail;
+};
+export default function GameDetailBanner({ gameDetail }: Props) {
+    const { data: gameStatus } = useQuery({
+        queryKey: ['gameStatus', gameDetail.id],
+        queryFn: async () => {
+            const { data } = await axios.get(`/api/user-game-status/${gameDetail.id}`);
+            return data;
+        }
+    });
+    const { data: review, isLoading } = useQuery({
+        queryKey: ['review', gameDetail.id],
+        queryFn: async () => {
+            const { data } = await axios.get(`/api/reviews/${gameDetail.id}/my-review`)
+            return data
+        }
+    })
+
     return (
         <div className="relative h-[60vh] w-full overflow-hidden">
             <Image
@@ -34,12 +46,27 @@ export default async function GameDetailBanner({ gameDetail }: { gameDetail: Gam
                     {gameDetail.name}
                 </h1>
                 <div className="flex justify-center gap-6 flex-wrap mb-6">
-                    <PlayedButton gameId={gameDetail.id} initialStatus={gameStatus.played} />
-                    <LikedButton gameId={gameDetail.id} initialStatus={gameStatus.liked} />
-                    <div className="cursor-pointer flex items-center gap-3 bg-black/60 text-gray-200 border border-white/10 hover:bg-black/70 px-4 py-2 rounded-full">
-                        <span className="text-sm text-white-300 font-semibold">Your Rating</span>
-                        <StarRating initialRating={reviewStars} />
-                    </div>
+                    {!gameStatus ? (
+                        <div className="flex items-center gap-4 animate-pulse">
+                            <div className="h-10 w-28 bg-white/10 rounded-full" />
+                            <div className="h-10 w-28 bg-white/10 rounded-full" />
+                        </div>
+                    ) : (
+                        <>
+                            <PlayedButton gameId={gameDetail.id} initialStatus={gameStatus.played} />
+                            <LikedButton gameId={gameDetail.id} initialStatus={gameStatus.liked} />
+                        </>
+                    )}
+                    {isLoading ?
+                        <div className="flex items-center gap-4 animate-pulse">
+                            <div className="h-10 w-28 bg-white/10 rounded-full flex-1" />
+                        </div>
+                        : (
+                            <div className="cursor-pointer flex items-center gap-3 bg-black/60 text-gray-200 border border-white/10 hover:bg-black/70 px-4 py-2 rounded-full">
+                                {review ? "Your Rating" : "Rate this game"}
+                                <StarRating review={review} gameId={gameDetail.id} />
+                            </div>
+                        )}
                 </div>
             </div>
         </div>

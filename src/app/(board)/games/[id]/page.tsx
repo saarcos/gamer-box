@@ -15,7 +15,6 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
         fetch(urlGame),
         fetch(urlScreenshots)
     ]);
-
     if (!resGame.ok || !resScreenshots.ok) {
         throw new Error('Failed to fetch game data or screenshots');
     }
@@ -37,9 +36,9 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
         publishers: gameData.publishers,
         esrb_rating: gameData.esrb_rating,
         stores: gameData.stores,
-        averageUserRating: 4.25, 
+        averageUserRating: 4.25,
         totalReviews: 2,
-        screenshots: screenshotsData.results 
+        screenshots: screenshotsData.results
     };
     const cleaned = gameDetail.description_raw.replace(/\r/g, '');
 
@@ -123,7 +122,7 @@ export default async function GameDetails({ params }: { params: Promise<{ id: st
                         <DetailsTabs gameDetail={gameDetail} />
                     </div>
                     <div className="border-t border-neutral-800 pt-5">
-                        <ReviewsSection gameDetail={gameDetail} />
+                        <ReviewsSection gameDetail={gameDetail}  />
                     </div>
                 </div>
             </div>

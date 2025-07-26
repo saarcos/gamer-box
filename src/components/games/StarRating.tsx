@@ -1,22 +1,55 @@
 "use client"
+import { Review } from '@/types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { Star, StarHalf } from 'lucide-react'
 import React, { useState } from 'react'
 
-export default function StarRating({ initialRating }: { initialRating: number }) {
-  const [rating, setRating] = useState(initialRating)
-  const [hoverRating, setHoverRating] = useState(0)
+type Props = {
+  review: Review | undefined,
+  gameId: number,
+}
+export default function StarRating({ review, gameId }: Props) {
+  const queryClient = useQueryClient();
+  const ratingMutation = useMutation({
+    mutationFn: async (newValue: number) => {
+      await axios.post(
+        `/api/reviews/${gameId}`, {
+        rating: newValue,
+      },)
+    },
+    onMutate: async (newValue: number) => {
+      await queryClient.cancelQueries({ queryKey: ['review', gameId] });
+      const previous = queryClient.getQueryData(["review", gameId]);
+      queryClient.setQueryData(["review", gameId], {
+        ...(previous || {}),
+        rating: newValue,
+      });
+      return { previous };
+    },
+    onError: (_err, _nextValue, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(["review", gameId], context.previous);
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["review", gameId] });
+    },
+  });
+  const rating = review?.rating ?? 0;
+  const [hoverRating, setHoverRating] = useState(0);
 
-  const handleClick = (value: number) => {
-    setRating(value)
+  const handleClick = async (value: number) => {
+    ratingMutation.mutate(value);
   }
 
   const handleHover = (value: number) => {
-    setHoverRating(value)
-  }
+    if (!ratingMutation.isPending) setHoverRating(value);
+  };
 
   const handleLeave = () => {
-    setHoverRating(0)
-  }
+    if (!ratingMutation.isPending) setHoverRating(0);
+  };
 
   return (
     <div className="flex items-center gap-1">

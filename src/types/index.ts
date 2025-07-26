@@ -1,3 +1,7 @@
+export type GameStatus = {
+    played: boolean;
+    liked: boolean;
+};
 export type Genre = {
     id: number,
     name: string,
@@ -49,9 +53,22 @@ export type Review = {
     gameId: number;
     rating: number;
     userLiked: boolean;
-    review?: string;
+    comment?: string;
     createdAt: string;
 };
+export type ReviewWithUserMeta = {
+    id: string;
+    userId: string;
+    username: string;
+    gameId: number;
+    rating: number;
+    comment?: string;
+    createdAt: string;
+    updatedAt: string;
+    userLiked: boolean;
+    likeCount: number;
+};
+
 export type Screenshot = {
     id: number;
     image: string;
